@@ -40,7 +40,7 @@ const applySecurityPolicies = () => {
                     // Define as fontes permitidas para imagens.
                     "img-src 'self' data: https://picsum.photos;",
                     // Restringe as URLs que podem ser conectadas via scripts.
-                    "connect-src 'self';",
+                    "connect-src 'self' https://generativelanguage.googleapis.com https://aistudio.google.com;",
                     // Impede que formulários enviem dados para qualquer lugar.
                     "form-action 'none';",
                     // Impede que a página seja embutida em iframes em outros sites.
