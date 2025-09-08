@@ -1,9 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { APIInteraction } from '../APIInteraction';
-import { promoteUser_BFLA, MOCK_LOGGED_IN_USER_ID } from '../../services/api';
+import { promoteUser_BFLA } from '../../services/api';
+import { UserContext } from '../../context/UserContext';
 
 export const API5_Bfla: React.FC = () => {
-    const [targetId, setTargetId] = useState('101');
+    const { currentUser } = useContext(UserContext);
+    const [targetId] = useState('101');
 
     const handleRequest = useCallback(async () => {
         // VULNERABILIDADE: Chamando uma função de nível de admin sem ser um admin.
@@ -14,7 +16,7 @@ export const API5_Bfla: React.FC = () => {
         <div>
             <h4 className="font-bold text-lg mb-2 text-sky-300">Análise de Logs e Resposta</h4>
             <p className="text-sm mb-2">
-                Você está logado como um usuário comum (ID {MOCK_LOGGED_IN_USER_ID}). A requisição <code>POST</code> foi enviada para o endpoint administrativo <code>/api/users/{targetId}/promote</code>.
+                Você está logado como <strong>{currentUser?.name}</strong>, que tem o cargo de <strong>{currentUser?.role}</strong>. A requisição <code>POST</code> foi enviada para o endpoint administrativo <code>/api/users/{targetId}/promote</code>.
             </p>
             <p className="text-sm mb-2">
                 A API respondeu com um status <code>200 OK</code> e uma mensagem de sucesso.
@@ -41,7 +43,7 @@ export const API5_Bfla: React.FC = () => {
             </header>
 
              <p className="text-gray-300">
-                Sua missão: Envie a requisição para o endpoint administrativo abaixo. Como um usuário regular, esta ação deveria falhar, mas devido à BFLA, ela terá sucesso.
+                Sua missão: Envie a requisição para o endpoint administrativo abaixo. Como um usuário com cargo de "{currentUser?.role}", esta ação deveria falhar, mas devido à BFLA, ela terá sucesso.
             </p>
 
             <APIInteraction

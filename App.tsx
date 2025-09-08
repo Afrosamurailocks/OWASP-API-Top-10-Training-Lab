@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigation, vulnerabilities } from './components/Navigation';
+import { UserProvider } from './context/UserContext';
+import { UserSwitcher } from './components/UserSwitcher';
 
 // Importa dinamicamente todos os componentes de demonstração
 import { API1_Bola } from './components/demos/API1_Bola';
@@ -31,7 +33,7 @@ const vulnerabilityComponents: Record<string, React.FC> = {
 
 const getHash = () => window.location.hash.replace('#', '');
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [activeHash, setActiveHash] = useState(getHash());
 
   useEffect(() => {
@@ -58,34 +60,45 @@ const App: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="flex min-h-screen font-sans text-white">
+      <Navigation activeVulnerabilityId={activeHash} />
+      
+      <main className="flex-1 p-4 sm:p-8 overflow-y-auto">
+        <UserSwitcher />
+        <div className="mt-6">
+          {ActiveComponent ? (
+              <ActiveComponent />
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full text-center animate-fade-in pt-16">
+                <h1 className="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">
+                  Laboratório de Treinamento OWASP API Top 10
+                </h1>
+                <p className="mt-4 text-lg text-gray-300">
+                  Selecione uma vulnerabilidade no menu à esquerda para começar.
+                </p>
+                <p className="mt-2 text-sm text-gray-400">
+                  Cada módulo oferece uma explicação e uma demonstração interativa da falha de segurança.
+                </p>
+              </div>
+            )}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+
+const App: React.FC = () => {
+  return (
+    <UserProvider>
       <div 
         className="fixed inset-0 z-[-1] bg-cover bg-center" 
         style={{ backgroundImage: "url('https://picsum.photos/1920/1080?grayscale&blur=2')" }}>
       </div>
       <div className="fixed inset-0 z-[-1] bg-black/80"></div>
       
-      <div className="flex min-h-screen font-sans text-white">
-        <Navigation activeVulnerabilityId={activeHash} />
-        
-        <main className="flex-1 p-4 sm:p-8 overflow-y-auto">
-          {ActiveComponent ? (
-            <ActiveComponent />
-          ) : (
-            <div className="flex flex-col items-center justify-center h-full text-center animate-fade-in">
-              <h1 className="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">
-                Laboratório de Treinamento OWASP API Top 10
-              </h1>
-              <p className="mt-4 text-lg text-gray-300">
-                Selecione uma vulnerabilidade no menu à esquerda para começar.
-              </p>
-              <p className="mt-2 text-sm text-gray-400">
-                Cada módulo oferece uma explicação e uma demonstração interativa da falha de segurança.
-              </p>
-            </div>
-          )}
-        </main>
-      </div>
+      <AppContent />
+
        <style>{`
           @keyframes fade-in {
             from { opacity: 0; transform: translateY(10px); }
@@ -95,7 +108,7 @@ const App: React.FC = () => {
             animation: fade-in 0.5s ease-out forwards;
           }
         `}</style>
-    </>
+    </UserProvider>
   );
 };
 

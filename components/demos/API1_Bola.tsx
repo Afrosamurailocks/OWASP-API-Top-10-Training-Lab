@@ -1,12 +1,20 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { APIInteraction } from '../APIInteraction';
-import { fetchUserData_BOLA, MOCK_LOGGED_IN_USER_ID } from '../../services/api';
+import { fetchUserData_BOLA } from '../../services/api';
 import { UserProfileCard } from '../UserProfileCard';
 import type { User } from '../../types';
+import { UserContext } from '../../context/UserContext';
 
 export const API1_Bola: React.FC = () => {
-    const [userId, setUserId] = useState(MOCK_LOGGED_IN_USER_ID);
+    const { currentUser } = useContext(UserContext);
+    const [userId, setUserId] = useState('');
     const [userData, setUserData] = useState<Partial<User> | null>(null);
+    
+    useEffect(() => {
+        if (currentUser) {
+            setUserId(currentUser.id);
+        }
+    }, [currentUser]);
 
     const handleRequest = useCallback(async () => {
         return await fetchUserData_BOLA(userId);
@@ -16,7 +24,7 @@ export const API1_Bola: React.FC = () => {
         <div>
             <h4 className="font-bold text-lg mb-2 text-sky-300">Análise de Logs e Resposta</h4>
             <p className="text-sm mb-2">
-                Você está logado como <strong>Usuário {MOCK_LOGGED_IN_USER_ID}</strong>. Sua primeira requisição para seu próprio ID (<code>/users/{MOCK_LOGGED_IN_USER_ID}</code>) retornou um status <code>200 OK</code>, o que é esperado.
+                Você está logado como <strong>{currentUser?.name}</strong>. Sua primeira requisição para seu próprio ID (<code>/users/{currentUser?.id}</code>) retornou um status <code>200 OK</code>, o que é esperado.
             </p>
             <p className="text-sm mb-2">
                 Agora, observe a resposta quando você solicitou um ID diferente (ex: <code>/users/202</code>). A API respondeu novamente com <code>200 OK</code> e os dados completos do outro usuário.

@@ -1,7 +1,5 @@
 import type { User } from '../types';
 
-export const MOCK_LOGGED_IN_USER_ID = '101';
-
 const mockUserDatabase: User[] = [
   {
     id: '101',
@@ -42,6 +40,11 @@ const mockUserDatabase: User[] = [
     department: 'Vendas'
   },
 ];
+
+// Funções para gerenciamento de estado global
+export const getMockUsers = (): User[] => mockUserDatabase;
+export const getUserById = (id: string): User | undefined => mockUserDatabase.find(u => u.id === id);
+
 
 const networkDelay = (ms = 800) => new Promise(resolve => setTimeout(resolve, ms));
 
