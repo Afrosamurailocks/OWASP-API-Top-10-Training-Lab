@@ -34,13 +34,13 @@ const applySecurityPolicies = () => {
                     // Restringe de onde os objetos (como <embed> ou <object>) podem ser carregados. 'none' bloqueia todos.
                     "object-src 'none';",
                     // Define as fontes permitidas para scripts. 'self' refere-se aos arquivos locais da aplicação.
-                    "script-src 'self' https://cdn.tailwindcss.com https://esm.sh;",
+                    "script-src 'self' https://cdn.tailwindcss.com https://esm.sh https://unpkg.com;",
                     // Define as fontes permitidas para estilos. 'unsafe-inline' é necessário para o Tailwind JIT e estilos no componente React.
                     "style-src 'self' 'unsafe-inline';",
                     // Define as fontes permitidas para imagens.
                     "img-src 'self' data: https://picsum.photos;",
                     // Restringe as URLs que podem ser conectadas via scripts.
-                    "connect-src 'self' https://generativelanguage.googleapis.com https://aistudio.google.com;",
+                    "connect-src 'self' https://esm.sh https://unpkg.com https://generativelanguage.googleapis.com https://aistudio.google.com;",
                     // Impede que formulários enviem dados para qualquer lugar.
                     "form-action 'none';",
                     // Impede que a página seja embutida em iframes em outros sites.
