@@ -17,6 +17,6 @@
   "author": "Interactive Lab",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^31.2.1"
+    "electron": "^32.0.1"
   }
 }
