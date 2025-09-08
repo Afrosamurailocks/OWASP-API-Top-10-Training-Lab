@@ -1,0 +1,22 @@
+{
+  "name": "owasp-api-top-10-lab",
+  "version": "1.0.0",
+  "description": "Uma aplicação web interativa para demonstrar as 10 principais vulnerabilidades de API da OWASP.",
+  "main": "electron.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "owasp",
+    "api",
+    "security",
+    "electron",
+    "lab"
+  ],
+  "author": "Interactive Lab",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.2.1"
+  }
+}

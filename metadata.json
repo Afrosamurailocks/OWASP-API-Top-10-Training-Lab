@@ -1,0 +1,5 @@
+{
+  "name": "OWASP API Top 10 Training Lab",
+  "description": "Uma aplicação web interativa para demonstrar as 10 principais vulnerabilidades de API da OWASP. Os usuários podem explorar e explorar ativamente cada vulnerabilidade em um ambiente de laboratório seguro.",
+  "requestFramePermissions": []
+}
