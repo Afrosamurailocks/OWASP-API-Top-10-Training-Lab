@@ -28,8 +28,9 @@ Você precisará ter o [Node.js](https://nodejs.org/) (que inclui o npm) instala
 ### Instalação
 
 1.  **Clone o repositório:**
+    Primeiro, você precisa clonar este repositório para a sua máquina local. Substitua `[URL_DO_SEU_REPOSITORIO]` pelo URL real do seu repositório no GitHub.
     ```sh
-    git clone https://github.com/exemplo-usuario/owasp-api-lab.git
+    git clone [URL_DO_SEU_REPOSITORIO]
     cd owasp-api-lab
     ```
 
